@@ -1,0 +1,21 @@
+body {
+  background-color: black;
+}
+h1 {
+  color: grey;
+  font: "Courier New";
+  text-align: center;
+}
+
+/* #my-button {
+	background-color: transparent;
+	height: 8%;
+	width: auto;
+	color: white;
+	text-align: center;
+  cursor: auto;
+  border-width: 0.5px;
+} */
+.container {
+  text-align: center;
+}
