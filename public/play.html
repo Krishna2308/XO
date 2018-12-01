@@ -14,13 +14,160 @@
 </head>
 
 <body>
+  <div class="container">
+    <!--  CREATE canvas element-->
+    <canvas id="myCanvas" width="500" height="300"></canvas>
+    <!--JAVASCRIPT code for the canvas elements and game animation  -->
+    <script>
+      //Get a reference to the canvas elemnt and the context
+      var canvas = document.getElementById("myCanvas");
+    	var ctx = canvas.getContext("2d");
+    	var x = canvas.width/2;
+    	var y = canvas.height-30;  //starting positions
+    	var dx = 2;  //change in x
+    	var dy = -2; //change in y
+    	var ballRadius = 10; //radius of the ball
+    	var paddleHeight = 10;
+    	var paddleWidth = 75;
+    	var paddleX = (canvas.width-paddleWidth)/2;  //paddle properties
+    	var rightPressed = false;
+    	var leftPressed = false; //variables to check for arrow keys
+      var brickRowCount = 3;
+      var brickColumnCount = 5;
+      var brickWidth = 75;
+      var brickHeight = 20;
+      var brickPadding = 10;
+      var brickOffsetTop = 30;
+      var brickOffsetLeft = 30; //brick properties
+      var score = 0;  //keeps count of the score
 
-  <h1>Play!</h1>
-  <div class="container col-md-4">
-    <a href="index.html">
-      <button id="my-button" type="button" name="Home">Home</button>
-    </a>
-  </div>
+      //create bricks
+      var bricks = [];
+      for(var c=0; c<brickColumnCount; c++) {
+          bricks[c] = [];
+          for(var r=0; r<brickRowCount; r++) {
+              bricks[c][r] = { x: 0, y: 0, status: 1 };
+          }
+      }
+    	function drawBall() {
+    		ctx.beginPath();
+    		ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    		ctx.fillStyle = "grey";
+    		ctx.fill();
+    		ctx.closePath();
+    	}
+    	function drawPaddle() {
+    		ctx.beginPath();
+    		ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    		ctx.fillStyle = "black";
+    		ctx.fill();
+    		ctx.closePath();
+    	}
+      //function to draw the bricks
+      function drawBricks() {
+        for(var c=0; c<brickColumnCount; c++) {
+            for(var r=0; r<brickRowCount; r++) {
+                //print the bricks only if they have not been destroyed yet
+                if (bricks[c][r].status == 1) {
+                  var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+                  var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+                  bricks[c][r].x = brickX;
+                  bricks[c][r].y = brickY;
+                  ctx.beginPath();
+                  ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                  ctx.fillStyle = "black";
+                  ctx.fill();
+                  ctx.closePath();
+                }
+            }
+        }
+      }
+    	function draw() {
+        // drawing code
+    		ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBricks();
+    		drawBall();
+    		drawPaddle();
+        drawScore();
+        collisionDetection();
+    		if(y + dy > canvas.height || y + dy < 0) {
+    			dy = -dy;
+    		}
+    		if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+    			dx = -dx;
+    		}
+    		if(y + dy < ballRadius) {
+    			dy = -dy;
+    		}
+        else if(y + dy > canvas.height-ballRadius) {
+          if(x > paddleX && x < paddleX + paddleWidth) {
+    			     dy = -dy;
+    		  }
+    		  else {
+    			   alert("GAME OVER");
+    			   document.location.reload();
+    		  }
+        }
+    		x += dx;
+    		y += dy;
+    		if(rightPressed && paddleX < canvas.width-paddleWidth) {
+    			paddleX += 7;
+    		}
+    		else if(leftPressed && paddleX > 0) {
+    			paddleX -= 7;
+    		}
+        //keep calling the draw function
+        requestAnimationFrame(draw);
+    	}
+    	document.addEventListener("keydown", keyDownHandler, false);
+    	document.addEventListener("keyup", keyUpHandler, false);
+    	function keyDownHandler(e) {
+    		if(e.keyCode == 39) {
+    			rightPressed = true;
+    		}
+    		else if(e.keyCode == 37) {
+    			leftPressed = true;
+    		}
+    	}
+
+    	function keyUpHandler(e) {
+    		if(e.keyCode == 39) {
+    			rightPressed = false;
+    		}
+    		else if(e.keyCode == 37) {
+    			leftPressed = false;
+    		}
+    	}
+      function collisionDetection() {
+        for(var c=0; c<brickColumnCount; c++) {
+            for(var r=0; r<brickRowCount; r++) {
+                var b = bricks[c][r];
+                if (b.status == 1) {
+                  //if the brick still exists, check for collision
+                  if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                    //if ball collides with the brick, change direction of the ball
+                    //and set brick status to 0. Also inrement score
+                      dy = -dy;
+                      b.status = 0;
+                      score++;
+                      //check if all bricks have been destroyed
+                      if(score == brickRowCount*brickColumnCount) {
+                        alert("YOU WIN, CONGRATULATIONS!");
+                        document.location.reload();
+                    }
+                  }
+                }
+            }
+        }
+      }
+      function drawScore() {
+        ctx.font = "16px Courier New";
+        ctx.fillStyle = "black";
+        ctx.fillText("Score: "+score, 8, 20);
+      }
+    	draw();
+    </script>
+    </div>
 </body>
 
 </html>
