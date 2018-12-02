@@ -33,20 +33,20 @@
     	var rightPressed = false;
     	var leftPressed = false; //variables to check for arrow keys
       var brickRowCount = 3;
-      var brickColumnCount = 5;
+      var brickColumnCount = 9;
       var brickWidth = 75;
       var brickHeight = 20;
       var brickPadding = 10;
       var brickOffsetTop = 30;
       var brickOffsetLeft = 30; //brick properties
       var score = 0;  //keeps count of the score
-      
+
       //create bricks
       var bricks = [];
       for(var c=0; c<brickColumnCount; c++) {
           bricks[c] = [];
           for(var r=0; r<brickRowCount; r++) {
-              bricks[c][r] = { x: 0, y: 0, status: 1 };
+            bricks[c][r] = { x: 0, y: 0, status: 1, random: Math.floor(Math.random() * 9)};
           }
       }
     	function drawBall() {
@@ -68,7 +68,7 @@
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
                 //print the bricks only if they have not been destroyed yet
-                if (bricks[c][r].status == 1) {
+                if (bricks[c][r].status == 1 && (bricks[c][r].random <= 4) ) {
                   var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
                   var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
                   bricks[c][r].x = brickX;
@@ -84,6 +84,7 @@
       }
     	function draw() {
         // drawing code
+        //clear the canvas
     		ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBricks();
     		drawBall();
@@ -150,6 +151,7 @@
                       dy = -dy;
                       b.status = 0;
                       score++;
+
                       //check if all bricks have been destroyed
                       if(score == brickRowCount*brickColumnCount) {
                         alert("YOU WIN, CONGRATULATIONS!");
