@@ -1,13 +1,16 @@
 README for XO
 
-XO is an online 2 player game that can be played by people around the world. 
+XO(famously known as brick breaker) is an online multiplayer game that can be played by people around the world. 
 
-Features:
-
+Features to implement:
 -> Authentication: Google/Facebook auth OR player can play as GUEST
--> Create game: Gives user a unique game token that they can give to the other player to use 
--> Join game: Once player 2 gets the unique token, they can enter it here 
-(Alternative for unique game token: We could give the the player a unique link to use for the game)
--> Leaderboard: Global leaderboard with in order of decreasing win/loss ratio
+-> Bricks keep reappearing?
+-> Difficulty levels / ball speed increases over time 
+-> Database: Global leaderboard with in order of decreasing win/loss ratio
+-> Server communication 
+
+Additional features: 
 -> Player profiles: User can browse player profiles and look at player stats (wins/losses/draws)
 
+Resources used:
+https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Finishing_up
