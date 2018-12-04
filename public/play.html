@@ -40,7 +40,9 @@
       var brickOffsetTop = 30;
       var brickOffsetLeft = 30; //brick properties
       var score = 0;  //keeps count of the score
-      var bricks = [];  //array that stores the bricks 
+      var bricks = [];  //array that stores the bricks
+      var yOffset = 0;  //the offset by which the bricks move downwards
+      var incrementLock = -1; //check to make sure yOffset is incremented only once every time the score%2 == 0
 
       //create bricks
       for(var c=0; c<brickColumnCount; c++) {
@@ -51,6 +53,14 @@
               bricks[c][r].destroyed = 1;
             }
           }
+      }
+      function updateyOffset() {
+        if (score != 0 && score%2 == 0 && incrementLock != score) {
+          //for every 2 bricks destroyed, increase yOffset by 10
+          //also check if yOffset has already been increased for the current score
+          yOffset += 10;
+        }
+        incrementLock = score;
       }
     	function drawBall() {
     		ctx.beginPath();
@@ -72,8 +82,8 @@
             for(var r=0; r<brickRowCount; r++) {
                 //print the bricks only if they have not been destroyed yet
                 if (bricks[c][r].destroyed == 1) {
-                  var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-                  var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+                  var brickX = (c*(brickWidth+brickPadding)) + brickOffsetLeft;
+                  var brickY = (r*(brickHeight+brickPadding)) + brickOffsetTop + yOffset;
                   bricks[c][r].x = brickX;
                   bricks[c][r].y = brickY;
                   ctx.beginPath();
@@ -89,6 +99,7 @@
         // drawing code
         //clear the canvas
     		ctx.clearRect(0, 0, canvas.width, canvas.height);
+        updateyOffset();
         drawBricks();
     		drawBall();
     		drawPaddle();
