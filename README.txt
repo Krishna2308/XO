@@ -9,10 +9,10 @@ Features to implement:
 -> Database: Global leaderboard
 -> Server side code - communicating with the database including:
                   1. write player score to leaderboard after every game
-                  2. read from database and print leaderboard  
+                  2. read from database and print leaderboard
 
 Additional features:
--> Player profiles: User can browse player profiles and look at player stats (wins/losses/draws)
+-> Player profiles: User can browse player profiles and look at player stats (attempts/highest score etc)
 
 Resources used:
 https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Finishing_up
