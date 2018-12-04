@@ -40,13 +40,16 @@
       var brickOffsetTop = 30;
       var brickOffsetLeft = 30; //brick properties
       var score = 0;  //keeps count of the score
+      var bricks = [];  //array that stores the bricks 
 
       //create bricks
-      var bricks = [];
       for(var c=0; c<brickColumnCount; c++) {
           bricks[c] = [];
           for(var r=0; r<brickRowCount; r++) {
-            bricks[c][r] = { x: 0, y: 0, status: 1, random: Math.floor(Math.random() * 9)};
+            bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9)};
+            if (bricks[c][r].random <= 4) {
+              bricks[c][r].destroyed = 1;
+            }
           }
       }
     	function drawBall() {
@@ -68,7 +71,7 @@
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
                 //print the bricks only if they have not been destroyed yet
-                if (bricks[c][r].status == 1 && (bricks[c][r].random <= 4) ) {
+                if (bricks[c][r].destroyed == 1) {
                   var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
                   var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
                   bricks[c][r].x = brickX;
@@ -143,13 +146,13 @@
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
                 var b = bricks[c][r];
-                if (b.status == 1) {
+                if (b.destroyed == 1) {
                   //if the brick still exists, check for collision
                   if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
                     //if ball collides with the brick, change direction of the ball
-                    //and set brick status to 0. Also inrement score
+                    //and set brick destroyed to 0. Also inrement score
                       dy = -dy;
-                      b.status = 0;
+                      b.destroyed = 0;
                       score++;
 
                       //check if all bricks have been destroyed
