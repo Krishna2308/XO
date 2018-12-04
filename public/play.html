@@ -40,25 +40,52 @@
       var brickOffsetTop = 30;
       var brickOffsetLeft = 30; //brick properties
       var score = 0;  //keeps count of the score
+      var level = 1;  //keeps count of the level
       var bricks = [];  //array that stores the bricks
       var yOffset = 0;  //the offset by which the bricks move downwards
       var incrementLock = -1; //check to make sure yOffset is incremented only once every time the score%2 == 0
 
+      //create first set of bricks
+      createBricks();
+
       //create bricks
-      for(var c=0; c<brickColumnCount; c++) {
-          bricks[c] = [];
-          for(var r=0; r<brickRowCount; r++) {
-            bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9)};
-            if (bricks[c][r].random <= 4) {
-              bricks[c][r].destroyed = 1;
+      function createBricks () {
+        for(var c=0; c<brickColumnCount; c++) {
+            bricks[c] = [];
+            for(var r=0; r<brickRowCount; r++) {
+              bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9)};
+              if (bricks[c][r].random <= 4) {
+                bricks[c][r].destroyed = 1;
+              }
             }
-          }
+        }
       }
-      function updateyOffset() {
+      /*
+      Modified createBricks to accomodate moving bricks down
+      */
+      function createBricksModified () {
+        for(var c=0; c<brickColumnCount && brickRowCount > 3; c++) {
+            bricks[c] = [];
+            for(var r=brickRowCount-1; r<brickRowCount; r++) {
+              bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9)};
+              if (bricks[c][r].random <= 4) {
+                bricks[c][r].destroyed = 1;
+              }
+            }
+        }
+      }
+      function update() {
+        //update yOffset
         if (score != 0 && score%2 == 0 && incrementLock != score) {
           //for every 2 bricks destroyed, increase yOffset by 10
           //also check if yOffset has already been increased for the current score
+          // createBricksModified();
           yOffset += 10;
+          // brickRowCount++;
+        }
+        //update level
+        if (score != 0 && score%10 == 0 && incrementLock != score) {
+          level++;
         }
         incrementLock = score;
       }
@@ -99,11 +126,13 @@
         // drawing code
         //clear the canvas
     		ctx.clearRect(0, 0, canvas.width, canvas.height);
-        updateyOffset();
+        //update yOffset and level
+        update();
         drawBricks();
     		drawBall();
     		drawPaddle();
         drawScore();
+        // drawLevel();
         collisionDetection();
     		if(y + dy > canvas.height || y + dy < 0) {
     			dy = -dy;
@@ -165,12 +194,6 @@
                       dy = -dy;
                       b.destroyed = 0;
                       score++;
-
-                      //check if all bricks have been destroyed
-                      if(score == brickRowCount*brickColumnCount) {
-                        alert("YOU WIN, CONGRATULATIONS!");
-                        document.location.reload();
-                    }
                   }
                 }
             }
@@ -180,6 +203,7 @@
         ctx.font = "16px Courier New";
         ctx.fillStyle = "black";
         ctx.fillText("Score: "+score, 8, 20);
+        ctx.fillText("Level: "+level, 350, 20);
       }
     	draw();
     </script>
