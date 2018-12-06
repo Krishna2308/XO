@@ -53,7 +53,7 @@
         for(var c=0; c<brickColumnCount; c++) {
             bricks[c] = [];
             for(var r=0; r<brickRowCount; r++) {
-              bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9)};
+              bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9), yOffset: 0};
               if (bricks[c][r].random <= 4) {
                 bricks[c][r].destroyed = 1;
               }
@@ -64,13 +64,27 @@
       Modified createBricks to accomodate moving bricks down
       */
       function createBricksModified () {
+        //create a temp variable
+        var tempBricks = [];
+        //transfer brick contents into temp
         for(var c=0; c<brickColumnCount && brickRowCount > 3; c++) {
-            bricks[c] = [];
-            for(var r=brickRowCount-1; r<brickRowCount; r++) {
-              bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9)};
-              if (bricks[c][r].random <= 4) {
-                bricks[c][r].destroyed = 1;
+          tempBricks[c] = [];
+            for(var r=0; r<brickRowCount; r++) {
+              if (r == 0) {
+                tempBricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9), yOffset: 0};
+                if (tempBricks[c][r].random <= 4) {
+                  tempBricks[c][r].destroyed = 1;
+                }
               }
+              else {
+                tempBricks[c][r] = bricks[c][r-1];
+              }
+            }
+        }
+        //transfer contents from tempBricks to bricks
+        for(var c=0; c<brickColumnCount && brickRowCount > 3; c++) {
+            for(var r=0; r<brickRowCount; r++) {
+              bricks[c][r] = tempBricks[c][r];
             }
         }
       }
@@ -79,15 +93,20 @@
         if (score != 0 && score%2 == 0 && incrementLock != score) {
           //for every 2 bricks destroyed, increase yOffset by 10
           //also check if yOffset has already been increased for the current score
-          // createBricksModified();
-          yOffset += 10;
-          // brickRowCount++;
+          for(var c=0; c<brickColumnCount; c++) {
+              for(var r=0; r<brickRowCount; r++) {
+                bricks[c][r].yOffset += 10;
+              }
+          }
         }
-        //update level
-        if (score != 0 && score%10 == 0 && incrementLock != score) {
+        //update level and ball speed
+        if (score != 0 && score%5 == 0 && incrementLock != score) {
           level++;
-          //TODO: for every level increase, add new bricks 
-
+          //create new bricks
+          brickRowCount++;
+          createBricksModified();
+          //dx += 2;
+          //dy += 2;
         }
         incrementLock = score;
       }
@@ -112,7 +131,7 @@
                 //print the bricks only if they have not been destroyed yet
                 if (bricks[c][r].destroyed == 1) {
                   var brickX = (c*(brickWidth+brickPadding)) + brickOffsetLeft;
-                  var brickY = (r*(brickHeight+brickPadding)) + brickOffsetTop + yOffset;
+                  var brickY = (r*(brickHeight+brickPadding)) + brickOffsetTop + bricks[c][r].yOffset;
                   bricks[c][r].x = brickX;
                   bricks[c][r].y = brickY;
                   ctx.beginPath();
