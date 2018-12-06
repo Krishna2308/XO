@@ -1,9 +1,25 @@
+/*
+CSS file for index.html and mainmenu.html
+*/
+@import url(https://fonts.googleapis.com/css?family=VT323);
+
 body {
+	background: slategray;
+	margin: 0;
+	overflow-y: scroll;
+	padding: 2ch;
+	text-align: center;
+}
+html {
+	font-family: 'VT323', monospace ;
+	font-size: 24px;
+}
+.grey-bg {
   background-color: grey;
 }
-h1 {
-  color: grey;
-  font: "Courier New";
+.XO-header {
+  color: black;
+  font-family: 'VT323', monospace ;
   text-align: center;
 }
 * {
@@ -15,15 +31,37 @@ canvas {
    display: block;
    margin: 0 auto;
  }
-/* #my-button {
-	background-color: transparent;
-	height: 8%;
-	width: auto;
-	color: white;
-	text-align: center;
-  cursor: auto;
-  border-width: 0.5px;
-} */
+ .btn {
+ 	background: #7C7C7C;
+ 	border-bottom: 6px inset rgba(0,0,0,.5);
+ 	border-left: 6px inset rgba(0,0,0,.5);
+ 	border-right: 6px inset rgba(255,255,255,.5);
+ 	border-top: 6px inset rgba(255,255,255,.5);
+ 	box-sizing: border-box;
+ 	color: white;
+ 	cursor: pointer;
+ 	display: inline-block;
+ 	/* font-size: 2.2rem; */
+ 	margin: 1rem;
+ 	min-width: 100px;
+ 	padding: .5rem;
+ 	text-transform: uppercase;
+ 	width: auto;
+
+ 	&:focus,
+ 	&:hover {
+ 		background: #BCBCBC;
+ 	}
+ }
+.btn.start {
+ 	background: #005800;
+
+ 	&:focus,
+ 	&:hover {
+ 		background: #A81000;
+ 	}
+ }
+
 .container {
   text-align: center;
 }
