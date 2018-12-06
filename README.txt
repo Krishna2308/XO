@@ -16,5 +16,6 @@ Features to implement:
 Additional features:
 [] Player profiles: User can browse player profiles and look at player stats (attempts/highest score etc)
 
-Resources used:
+Resources/Inspiration:
 https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Finishing_up
+https://codepen.io/Brandon-Stoyles/pen/RajYmd
