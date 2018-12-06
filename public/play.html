@@ -44,6 +44,8 @@
       var bricks = [];  //array that stores the bricks
       var yOffset = 0;  //the offset by which the bricks move downwards
       var incrementLock = -1; //check to make sure yOffset is incremented only once every time the score%2 == 0
+      var velocityX = 0;  //velocity for X
+      var velocityY = 0;  //velocity for Y
 
       //create first set of bricks
       createBricks();
@@ -105,8 +107,9 @@
           //create new bricks
           brickRowCount++;
           createBricksModified();
-          //dx += 2;
-          //dy += 2;
+          //ball velocity increases after every level
+          dx *= 2;
+          dy *= 2;
         }
         incrementLock = score;
       }
@@ -123,7 +126,7 @@
     		ctx.fillStyle = "black";
     		ctx.fill();
     		ctx.closePath();
-    	}      
+    	}
       //function to draw the bricks
       function drawBricks() {
         for(var c=0; c<brickColumnCount; c++) {
@@ -153,8 +156,8 @@
     		drawBall();
     		drawPaddle();
         drawScore();
-        // drawLevel();
         collisionDetection();
+        //top and bottom walls collision
     		if(y + dy > canvas.height || y + dy < 0) {
     			dy = -dy;
     		}
@@ -166,6 +169,7 @@
     		}
         else if(y + dy > canvas.height-ballRadius) {
           if(x > paddleX && x < paddleX + paddleWidth) {
+            //ball hits the paddle
     			     dy = -dy;
     		  }
     		  else {
@@ -173,8 +177,8 @@
     			   document.location.reload();
     		  }
         }
-    		x += dx;
-    		y += dy;
+    		x = x + dx;
+    		y = y + dy
     		if(rightPressed && paddleX < canvas.width-paddleWidth) {
     			paddleX += 7;
     		}
