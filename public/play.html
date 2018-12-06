@@ -10,7 +10,7 @@
   <meta name="author" content="Krishna Suresh, Kailasam Ayalur Sriram">
 
   <!-- <link id="icon" rel="icon" href="img\favicon.ico"> -->
-  <link rel="stylesheet" type="text/css" href="style/styles.css">
+  <link rel="stylesheet" type="text/css" href="style/styles_play.css">
   <!-- Firebase App is always required and must be first -->
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
 
@@ -259,6 +259,7 @@
         ctx.fillText("Level: "+level, 350, 20);
       }
       function gameOver() {
+        ctx.font = "25px Courier New";
         //clear canvas
         //fill canvas bg color
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -270,9 +271,12 @@
         //print game over text
         ctx.fillStyle = "green";
         ctx.fillText("Game Over!", 300, 150);
-        ctx.fillText("Score: " + score, 220, 220);
-        ctx.fillText("Level: " + level, 220, 240);
-        ctx.fillText("(Press spacebar to play again)", 220, 350);
+        ctx.font = "20px Courier New";
+        ctx.fillText("Score: " + score, 250, 220);
+        ctx.fillText("Level: " + level, 250, 260);
+
+        ctx.font = "16px Courier New";
+        ctx.fillText("(Press spacebar to play again)", 220, 300);
         document.addEventListener("keydown", spacebarHandler, false);
       }
       function spacebarHandler(e) {
