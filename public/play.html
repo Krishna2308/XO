@@ -70,6 +70,8 @@
       var incrementLock = -1; //check to make sure yOffset is incremented only once every time the score%2 == 0
       var velocityX = 0;  //velocity for X
       var velocityY = 0;  //velocity for Y
+      var checkGameOver = false;  //to check if game is over 
+
       //create first set of bricks
       createBricks();
       //create bricks
@@ -196,9 +198,9 @@
                dy = -dy;
           }
           else {
-             alert("GAME OVER");
-             document.location.reload();
-             // gameOver();
+             // alert("GAME OVER");
+             // document.location.reload();
+             gameOver();
           }
         }
         x = x + dx;
@@ -253,20 +255,20 @@
         ctx.fillText("Score: "+score, 8, 20);
         ctx.fillText("Level: "+level, 350, 20);
       }
-      // function gameOver() {
-      //   ctx.fillText("Game Over", 310, 200);
-      //   ctx.fillText("Score: " + score, 270, 250);
-      //   ctx.fillText("Level: " + level, 270, 300);
-      //   ctx.fillText("(Press spacebar to play again)", 270, 350);
-      //   document.addEventListener("keydown", spacebarHandler, false);
-      // }
-      // function spacebarHandler(e) {
-      //   //spacebar is pressed
-      //   if(e.keyCode == 32) {
-      //     //restart game
-      //     document.location.reload();
-      //   }
-      // }
+      function gameOver() {
+        ctx.fillText("Game Over", 310, 200);
+        ctx.fillText("Score: " + score, 270, 250);
+        ctx.fillText("Level: " + level, 270, 300);
+        ctx.fillText("(Press spacebar to play again)", 270, 350);
+        document.addEventListener("keydown", spacebarHandler, false);
+      }
+      function spacebarHandler(e) {
+        //spacebar is pressed
+        if(e.keyCode == 32) {
+          //restart game
+          document.location.reload();
+        }
+      }
       draw();
     </script>
     </div>
