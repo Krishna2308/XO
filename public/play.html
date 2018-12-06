@@ -11,6 +11,30 @@
 
   <!-- <link id="icon" rel="icon" href="img\favicon.ico"> -->
   <link rel="stylesheet" type="text/css" href="style/styles.css">
+  <!-- Firebase App is always required and must be first -->
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+
+  <!-- Add additional services that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC3mArfFhP19NkCEc9e6WIfzfCQV1ML8tQ",
+      authDomain: "tictactwo-6f158.firebaseapp.com",
+      databaseURL: "https://tictactwo-6f158.firebaseio.com",
+      projectId: "tictactwo-6f158",
+      storageBucket: "tictactwo-6f158.appspot.com",
+      messagingSenderId: "36054004772"
+    };
+    firebase.initializeApp(config);
+  </script>
 </head>
 
 <body>
@@ -21,17 +45,17 @@
     <script>
       //Get a reference to the canvas elemnt and the context
       var canvas = document.getElementById("myCanvas");
-    	var ctx = canvas.getContext("2d");
-    	var x = canvas.width/2;
-    	var y = canvas.height-30;  //starting positions
-    	var dx = 2;  //change in x
-    	var dy = -2; //change in y
-    	var ballRadius = 10; //radius of the ball
-    	var paddleHeight = 10;
-    	var paddleWidth = 75;
-    	var paddleX = (canvas.width-paddleWidth)/2;  //paddle properties
-    	var rightPressed = false;
-    	var leftPressed = false; //variables to check for arrow keys
+      var ctx = canvas.getContext("2d");
+      var x = canvas.width/2;
+      var y = canvas.height-30;  //starting positions
+      var dx = 2;  //change in x
+      var dy = -2; //change in y
+      var ballRadius = 10; //radius of the ball
+      var paddleHeight = 10;
+      var paddleWidth = 75;
+      var paddleX = (canvas.width-paddleWidth)/2;  //paddle properties
+      var rightPressed = false;
+      var leftPressed = false; //variables to check for arrow keys
       var brickRowCount = 3;
       var brickColumnCount = 9;
       var brickWidth = 75;
@@ -46,10 +70,8 @@
       var incrementLock = -1; //check to make sure yOffset is incremented only once every time the score%2 == 0
       var velocityX = 0;  //velocity for X
       var velocityY = 0;  //velocity for Y
-
       //create first set of bricks
       createBricks();
-
       //create bricks
       function createBricks () {
         for(var c=0; c<brickColumnCount; c++) {
@@ -113,20 +135,20 @@
         }
         incrementLock = score;
       }
-    	function drawBall() {
-    		ctx.beginPath();
-    		ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    		ctx.fillStyle = "grey";
-    		ctx.fill();
-    		ctx.closePath();
-    	}
-    	function drawPaddle() {
-    		ctx.beginPath();
-    		ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    		ctx.fillStyle = "black";
-    		ctx.fill();
-    		ctx.closePath();
-    	}
+      function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "grey";
+        ctx.fill();
+        ctx.closePath();
+      }
+      function drawPaddle() {
+        ctx.beginPath();
+        ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        ctx.closePath();
+      }
       //function to draw the bricks
       function drawBricks() {
         for(var c=0; c<brickColumnCount; c++) {
@@ -146,67 +168,66 @@
             }
         }
       }
-    	function draw() {
+      function draw() {
         // drawing code
         //clear the canvas
-    		ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         //update yOffset and level
         update();
         drawBricks();
-    		drawBall();
-    		drawPaddle();
+        drawBall();
+        drawPaddle();
         drawScore();
         collisionDetection();
         //top and bottom walls collision
-    		if(y + dy > canvas.height || y + dy < 0) {
-    			dy = -dy;
-    		}
-    		if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-    			dx = -dx;
-    		}
-    		if(y + dy < ballRadius) {
-    			dy = -dy;
-    		}
+        if(y + dy > canvas.height || y + dy < 0) {
+          dy = -dy;
+        }
+        if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+          dx = -dx;
+        }
+        if(y + dy < ballRadius) {
+          dy = -dy;
+        }
         else if(y + dy > canvas.height-ballRadius) {
           if(x > paddleX && x < paddleX + paddleWidth) {
             //ball hits the paddle
-    			     dy = -dy;
-    		  }
-    		  else {
-    			   alert("GAME OVER");
-    			   document.location.reload();
-    		  }
+               dy = -dy;
+          }
+          else {
+             alert("GAME OVER");
+             document.location.reload();
+          }
         }
-    		x = x + dx;
-    		y = y + dy
-    		if(rightPressed && paddleX < canvas.width-paddleWidth) {
-    			paddleX += 7;
-    		}
-    		else if(leftPressed && paddleX > 0) {
-    			paddleX -= 7;
-    		}
+        x = x + dx;
+        y = y + dy
+        if(rightPressed && paddleX < canvas.width-paddleWidth) {
+          paddleX += 7;
+        }
+        else if(leftPressed && paddleX > 0) {
+          paddleX -= 7;
+        }
         //keep calling the draw function
         requestAnimationFrame(draw);
-    	}
-    	document.addEventListener("keydown", keyDownHandler, false);
-    	document.addEventListener("keyup", keyUpHandler, false);
-    	function keyDownHandler(e) {
-    		if(e.keyCode == 39) {
-    			rightPressed = true;
-    		}
-    		else if(e.keyCode == 37) {
-    			leftPressed = true;
-    		}
-    	}
-
-    	function keyUpHandler(e) {
-    		if(e.keyCode == 39) {
-    			rightPressed = false;
-    		}
-    		else if(e.keyCode == 37) {
-    			leftPressed = false;
-    		}
-    	}
+      }
+      document.addEventListener("keydown", keyDownHandler, false);
+      document.addEventListener("keyup", keyUpHandler, false);
+      function keyDownHandler(e) {
+        if(e.keyCode == 39) {
+          rightPressed = true;
+        }
+        else if(e.keyCode == 37) {
+          leftPressed = true;
+        }
+      }
+      function keyUpHandler(e) {
+        if(e.keyCode == 39) {
+          rightPressed = false;
+        }
+        else if(e.keyCode == 37) {
+          leftPressed = false;
+        }
+      }
       function collisionDetection() {
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
@@ -230,7 +251,7 @@
         ctx.fillText("Score: "+score, 8, 20);
         ctx.fillText("Level: "+level, 350, 20);
       }
-    	draw();
+      draw();
     </script>
     </div>
 </body>
