@@ -84,7 +84,7 @@
             }
         }
       }
-      
+
       /*
       Modified createBricks to accomodate moving bricks down
       */
@@ -198,6 +198,7 @@
           else {
              alert("GAME OVER");
              document.location.reload();
+             // gameOver();
           }
         }
         x = x + dx;
@@ -248,10 +249,24 @@
       }
       function drawScore() {
         ctx.font = "16px Courier New";
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "green";
         ctx.fillText("Score: "+score, 8, 20);
         ctx.fillText("Level: "+level, 350, 20);
       }
+      // function gameOver() {
+      //   ctx.fillText("Game Over", 310, 200);
+      //   ctx.fillText("Score: " + score, 270, 250);
+      //   ctx.fillText("Level: " + level, 270, 300);
+      //   ctx.fillText("(Press spacebar to play again)", 270, 350);
+      //   document.addEventListener("keydown", spacebarHandler, false);
+      // }
+      // function spacebarHandler(e) {
+      //   //spacebar is pressed
+      //   if(e.keyCode == 32) {
+      //     //restart game
+      //     document.location.reload();
+      //   }
+      // }
       draw();
     </script>
     </div>
