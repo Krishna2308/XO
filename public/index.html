@@ -20,6 +20,14 @@
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
 
+  <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
   <script>
@@ -39,28 +47,35 @@
 <body class="grey-bg">
   <div class="container">
     <h1 class="XO-header">XO</h1>
-    <div class="row col-md-4">
-        <label for="email"><b>Email</b></label><br>
-        <input id="txtuser" type="email" required="Please enter an email" placeholder="Email" autofocus name = "email">
-        <br>
-        <br>
-        <label for="pass"><b>Password</b></label><br>
-        <input id="txtpass" type="password" required="Please enter a password" placeholder="Password" name="pass">
-        <br>
-        <br>
-        <button onclick="login()" id="loginButton" title="Press this to Login">Login with Google</button>
-        <div class="row col-md-4">
+    <div>
+      <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="login container col-lg-4">
+            <label for="email"><b>Email</b></label><br>
+            <input id="txtuser" type="email" required="Please enter an email" placeholder="Email" autofocus name = "email">
+            <br>
+            <br>
+            <label for="pass"><b>Password</b></label><br>
+            <input id="txtpass" type="password" required="Please enter a password" placeholder="Password" name="pass">
+        </div>
+        <div class="col-lg-4"></div>
+      </div>
+      <br>
+      <div class="row">
+        <!-- <div class="col-lg-3"></div> -->
+        <div class="col-lg-10">
+          <button onclick="login()" id="loginButton" title="Press this to Login">Login with Google</button>
           <a href="mainmenu.html">
             <button id="my-button" type="button" name="Play">Login with Facebook</button>
           </a>
-          <div class="row col-md-4">
-            <a href="play.html">
-              <button id="my-button" type="button" name="Play">Play as Guest</button>
-            </a>
-            <br><br>
-            No account? <a href="signup.html">Sign up</a>
-          </div>
+          <a href="play.html">
+            <button id="my-button" type="button" name="Play">Play as Guest</button>
+          </a>
+          <div class="col-lg-2"></div>
         </div>
+          <br><br>
+          No account? <a href="signup.html">Sign up</a>
+      </div>
     </div>
   </div>
 </body>
