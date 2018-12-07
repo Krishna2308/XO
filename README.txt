@@ -2,7 +2,7 @@ README for XO
 
 XO is our take on brick breaker- A game where the user uses a paddle and a ball and attempts to destroy as many bricks as possible without letting the ball hit the ground.
 
-Features to implement:
+Features implemented:
 [X] User Authentication: Basic Authentication. Optional addition: Google and/or Facebook Auth.
 [X] Bricks keep reappearing
 [X] levels
