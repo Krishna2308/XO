@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Sign Up!</title>
+<link rel="stylesheet" type="text/css" href="style/styles.css">
 <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
 
   <!-- Add additional services that you want to use -->
@@ -27,52 +28,33 @@
   </script>
   <script src="login.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-kCsv8pSAWtRge/+zcLDeqwoWhTQSUX2esQPYOsocgrg1eMj7T2wrTJP348T3mpBU" crossorigin="anonymous">
-
-<style>
-.signupbox {
-        width: 320px;
-        height:420px;
-        background: transparent;
-        color: rgb(44, 125, 120);
-        top: 30%;
-        left: 50%;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        box-sizing: border-box;
-}
-h1{
-        font-family: sans-serif;
-        text-align: center;
-        color: rgb(18, 40, 40);
-}
-</style>
 </head>
-<body>
+<body class="signupbox">
   <div class="container">
-
-
-
-    <div class = "signupbox">
-
         <center>
-        <h1>Sign Up!</h1>
+        <h1 class="XO-header">Sign Up!</h1>
         <br>
         <p>Create an account!</p>
         <br>
         </center>
-
-
-
-        <label for="user"><b>Choose an Email</b></label>
-        <input id="txtuser" type="email" placeholder="Enter Email" name="user" required autofocus>
-
-        <label for="pass"><b>Choose a password</b></label>
-        <input id="txtpass" type="password" placeholder="Enter Password" name="pass" required>
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-4">
+            <label for="user"><b>Enter Email</b></label>
+            <input id="txtuser" type="email" placeholder="Enter Email" name="user" required autofocus>
+        </div>
+        </div>
+      </br>
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-4">
+            <label for="pass"><b>Choose a password</b></label>
+            <input id="txtpass" type="password" placeholder="Enter Password" name="pass" required>
+          </div>
+        </div>
 
         <br>
-        <button onclick="signUp()" id="signupButton">Sign Up</button>
-
-    </div>
+        <button class="btn"onclick="signUp()" id="signupButton">Sign Up</button>
 
   </div>
 
