@@ -81,9 +81,22 @@ canvas {
  		background: #0000FC;
  	}
  }
+ .btn.red {
+	background: #881400;
+
+	&:focus,
+	&:hover {
+		background: #A81000;
+	}
+}
 .container {
   text-align: center;
   /* display: flex;
   justify-content: center;
   align-items: center; */
+}
+.signupbox {
+        background: slategray;
+        /* color: rgb(44, 125, 120); */
+        box-sizing: border-box;
 }
