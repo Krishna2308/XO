@@ -71,7 +71,6 @@
       var velocityX = 0;  //velocity for X
       var velocityY = 0;  //velocity for Y
       var checkGameOver = false;  //to check if game is over
-
       //create first set of bricks
       createBricks();
       //create bricks
@@ -86,7 +85,6 @@
             }
         }
       }
-
       /*
       Modified createBricks to accomodate moving bricks down
       */
@@ -276,7 +274,6 @@
         ctx.font = "18px monospace";
         ctx.fillText("Score: " + score, 325, 220);
         ctx.fillText("Level: " + level, 325, 260);
-
         ctx.font = "16px monospace";
         ctx.fillText("(Press spacebar to play again)", 230, 300);
         document.addEventListener("keydown", spacebarHandler, false);
