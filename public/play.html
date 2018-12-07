@@ -34,6 +34,7 @@
       messagingSenderId: "36054004772"
     };
     firebase.initializeApp(config);
+    var database = firebase.database();
   </script>
 </head>
 
@@ -115,7 +116,7 @@
       }
       function update() {
         //update yOffset
-        if (score != 0 && score%3 == 0 && incrementLock != score) {
+        if (score != 0 && score%2 == 0 && incrementLock != score) {
           //for every 2 bricks destroyed, increase yOffset by 10
           //also check if yOffset has already been increased for the current score
           for(var c=0; c<brickColumnCount; c++) {
@@ -259,6 +260,7 @@
         ctx.fillText("Level: "+level, 350, 20);
       }
       function gameOver() {
+        //uLB();
         ctx.font = "25px monospace";
         //clear canvas
         //fill canvas bg color
@@ -275,6 +277,7 @@
         ctx.fillText("Score: " + score, 325, 220);
         ctx.fillText("Level: " + level, 325, 260);
         ctx.font = "16px monospace";
+        uLB();
         ctx.fillText("(Press spacebar to play again)", 230, 300);
         document.addEventListener("keydown", spacebarHandler, false);
       }
@@ -284,6 +287,15 @@
           //restart game
           document.location.reload();
         }
+      }
+      function uLB(){
+        //get unique ID of user
+        var ClientKey = database.ref().child('LB').push().key;
+        alert("here af")
+        database.ref('LB/' + ClientKey + '/HighLevel').set(level);
+        database.ref('LB/' + ClientKey + '/HighScore').set(score);
+        database.ref('LB/' + ClientKey + '/Rank').set(score);
+        alert("Written to DB")
       }
       draw();
     </script>
