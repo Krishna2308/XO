@@ -3,6 +3,9 @@ CSS file for index.html and mainmenu.html
 */
 @import url(https://fonts.googleapis.com/css?family=VT323);
 
+* {
+  text-align: center;
+}
 body {
 	background: slategray;
 	margin: 0;
@@ -35,7 +38,7 @@ html {
   margin: 0;
 }
 canvas {
-   background: white;
+   background: black;
    display: block;
    margin: 0 auto;
  }
@@ -89,6 +92,15 @@ canvas {
 		background: #A81000;
 	}
 }
+.btn.black {
+ 	background: black;
+  font-family: 'VT323', monospace ;
+
+ 	&:focus,
+ 	&:hover {
+ 		background: #A81000;
+ 	}
+ }
 .container {
   text-align: center;
   /* display: flex;
@@ -99,4 +111,9 @@ canvas {
         background: slategray;
         /* color: rgb(44, 125, 120); */
         box-sizing: border-box;
+}
+.footer {
+  /* height: 30%; */
+  width: 100%;
+  background-color: black;
 }
