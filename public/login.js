@@ -1,9 +1,9 @@
 function initApp(){
 	var unsub = firebase.auth().onAuthStateChanged(function(user) {
 	if(user) {
-		window.location.href = "play.html";
+		window.location.href = "mainmenu.html";
 	} else {
-		console.log('not logged in');	
+		console.log('not logged in');
 	}
 	});
 }
@@ -45,7 +45,7 @@ function signUp() {
 		var errorMessage = error.message;
 		console.log("we in here");
 		window.alert("Error: " + errorMessage);
-	}); 
+	});
 
 	console.log("signed up with email " + userEmail);
 
