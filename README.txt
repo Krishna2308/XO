@@ -9,7 +9,7 @@ Features to implement:
 [X] Ball speed increases over time
 [X] Database: Global leaderboard
 [X] Edit homepage - make buttons look better, add game info, add leaderboard button
-[] Host project
+[X] Host project
 [] Make youtube video
 [] Make git repo public
 [] Update cs252 google doc
