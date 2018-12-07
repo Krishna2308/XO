@@ -14,6 +14,15 @@
 
 </head>
 <body class="grey-bg">
+  <script type="text/javascript">
+  function logout(){
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+      }, function(error) {
+          console.error('Sign Out Error', error);
+        });
+  }
+  </script>
   <div class="container">
     <h1 class="XO-header">XO</h1>
     <div class="row col-md-4">
@@ -28,10 +37,10 @@
       <a href="rules.html">
         <button class="btn blue" type="button" name="button">Rules</button>
       </a>
-    </div>    
+    </div>
     <div class="row col-md-4">
       <a href="index.html">
-        <button class="btn red" type="button" name="button">Logout</button>
+        <button onclick="logout()" class="btn red" type="button" name="button">Logout</button>
       </a>
     </div>
   </div>
