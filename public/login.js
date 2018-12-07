@@ -1,9 +1,16 @@
 function initApp(){
 	var unsub = firebase.auth().onAuthStateChanged(function(user) {
 	if(user) {
-		window.location.href = "mainmenu.html";
+		var uid;
+        uid = user.uid;
+        window.alert(uid);
+        var userName = document.getElementById("txtun").value;
+        database.ref('USER/' + uid + '/name').set(userName);
+        window.location.href = "mainmenu.html";
+		//console.log("signed up with email " + userEmail);
+		//window.alert("here")
 	} else {
-		console.log('not logged in');
+		console.log('not logged in');	
 	}
 	});
 }
@@ -34,22 +41,18 @@ function login() {
 function signUp() {
 	var userEmail = document.getElementById("txtuser").value;
 	var userPass = document.getElementById("txtpass").value;
-	if(!userPass || !userEmail){
+	var userName = document.getElementById("txtun").value;
+	window.alert(userName)
+	if(!userPass || !userEmail || !userName){
 		window.alert("email and password required");
 		return console.log('email and password required');
 	}
-
-
 	firebase.auth().createUserWithEmailAndPassword(userEmail, userPass).catch(function(error) {
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		console.log("we in here");
 		window.alert("Error: " + errorMessage);
-	});
-
-	console.log("signed up with email " + userEmail);
-
-	//check email
+	}); 
 };
 
 if(window.closed){

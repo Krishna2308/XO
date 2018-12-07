@@ -83,11 +83,11 @@
               if (bricks[c][r].random <= 4) {
                 bricks[c][r].destroyed = 1;
                 switch (bricks[c][r].random) {
-                  case 1: {bricks[c][r].color = "red";break;}
-                  case 2: {bricks[c][r].color = "orange";break;}
-                  case 3: {bricks[c][r].color = "blue";break;}
-                  case 4: {bricks[c][r].color = "green";break;}
-                }
+                   case 1: {bricks[c][r].color = "red";break;}
+                   case 2: {bricks[c][r].color = "orange";break;}
+                   case 3: {bricks[c][r].color = "blue";break;}
+                   case 4: {bricks[c][r].color = "green";break;}
+                 }
               }
             }
         }
@@ -107,11 +107,11 @@
                 if (tempBricks[c][r].random <= 4) {
                   tempBricks[c][r].destroyed = 1;
                   switch (bricks[c][r].random) {
-                    case 1: {bricks[c][r].color = "red";break;}
-                    case 2: {bricks[c][r].color = "orange";break;}
-                    case 3: {bricks[c][r].color = "blue";break;}
-                    case 4: {bricks[c][r].color = "green";break;}
-                  }
+                   case 1: {bricks[c][r].color = "red";break;}
+                   case 2: {bricks[c][r].color = "orange";break;}
+                   case 3: {bricks[c][r].color = "blue";break;}
+                   case 4: {bricks[c][r].color = "green";break;}
+                 }
                 }
               }
               else {
@@ -272,7 +272,6 @@
         ctx.fillText("Level: "+level, 350, 20);
       }
       function gameOver() {
-        //uLB();
         ctx.font = "25px monospace";
         //clear canvas
         //fill canvas bg color
@@ -302,10 +301,25 @@
       }
       function uLB(){
         //get unique ID of user
-        var ClientKey = database.ref().child('LB').push().key;
-        database.ref('LB/' + ClientKey + '/HighLevel').set(level);
-        database.ref('LB/' + ClientKey + '/HighScore').set(score);
-        database.ref('LB/' + ClientKey + '/Rank').set(score);
+        var uid, userName;
+        var user = firebase.auth().currentUser;
+        if(user != null){
+          uid = user.uid;
+        }
+        //get username of user
+        var ref1 = firebase.database().ref("USER/" + uid + "/name");
+        ref1.on('value', gotData);
+        //var ClientKey = database.ref().child('LB').push().key;
+        database.ref('LB/' + uid + '/HighLevel').set(level);
+        database.ref('LB/' + uid + '/HighScore').set(score);
+        database.ref('LB/' + uid + '/Rank').set(score);
+        database.ref('LB/' + uid + '/name').set(uid);
+      }
+      function gotData(data){
+        console.log(data.val());
+        userName = data.val();
+        JSON.parse( JSON.stringify(userName ) )
+        //alert(userName);
       }
       draw();
     </script>

@@ -25,6 +25,7 @@
       messagingSenderId: "36054004772"
     };
     firebase.initializeApp(config);
+    var database = firebase.database();
   </script>
   <script src="login.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-kCsv8pSAWtRge/+zcLDeqwoWhTQSUX2esQPYOsocgrg1eMj7T2wrTJP348T3mpBU" crossorigin="anonymous">
@@ -41,10 +42,10 @@
           <div class="col-lg-4"></div>
           <div class="col-lg-4">
             <label for="user"><b>Enter Email</b></label>
-            <input id="txtuser" type="email" placeholder="Enter Email" name="user" required autofocus>
+            <input id="txtuser" type="text" placeholder="Enter Email" name="user" required autofocus>
         </div>
         </div>
-      </br>
+        </br>
         <div class="row">
           <div class="col-lg-4"></div>
           <div class="col-lg-4">
@@ -52,7 +53,14 @@
             <input id="txtpass" type="password" placeholder="Enter Password" name="pass" required>
           </div>
         </div>
-
+        <br>
+        <div class="row">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-4">
+            <label for="UserName"><b>Choose a UserName</b></label>
+            <input id="txtun" type="text" placeholder="Enter UserName" name="un" required>
+          </div>
+        </div>
         <br>
         <button class="btn"onclick="signUp()" id="signupButton">Sign Up</button>
 
