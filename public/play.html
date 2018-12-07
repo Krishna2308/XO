@@ -79,9 +79,15 @@
         for(var c=0; c<brickColumnCount; c++) {
             bricks[c] = [];
             for(var r=0; r<brickRowCount; r++) {
-              bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9), yOffset: 0};
+              bricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9), yOffset: 0, color: ""};
               if (bricks[c][r].random <= 4) {
                 bricks[c][r].destroyed = 1;
+                switch (bricks[c][r].random) {
+                  case 1: {bricks[c][r].color = "red";break;}
+                  case 2: {bricks[c][r].color = "orange";break;}
+                  case 3: {bricks[c][r].color = "blue";break;}
+                  case 4: {bricks[c][r].color = "green";break;}
+                }
               }
             }
         }
@@ -97,9 +103,15 @@
           tempBricks[c] = [];
             for(var r=0; r<brickRowCount; r++) {
               if (r == 0) {
-                tempBricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9), yOffset: 0};
+                tempBricks[c][r] = { x: 0, y: 0, destroyed: 0, random: Math.floor(Math.random() * 9), yOffset: 0, color: ""};
                 if (tempBricks[c][r].random <= 4) {
                   tempBricks[c][r].destroyed = 1;
+                  switch (bricks[c][r].random) {
+                    case 1: {bricks[c][r].color = "red";break;}
+                    case 2: {bricks[c][r].color = "orange";break;}
+                    case 3: {bricks[c][r].color = "blue";break;}
+                    case 4: {bricks[c][r].color = "green";break;}
+                  }
                 }
               }
               else {
@@ -149,7 +161,7 @@
       function drawPaddle() {
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.fill();
         ctx.closePath();
       }
@@ -165,7 +177,7 @@
                   bricks[c][r].y = brickY;
                   ctx.beginPath();
                   ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                  ctx.fillStyle = "black";
+                  ctx.fillStyle = bricks[c][r].color;
                   ctx.fill();
                   ctx.closePath();
                 }
@@ -291,11 +303,9 @@
       function uLB(){
         //get unique ID of user
         var ClientKey = database.ref().child('LB').push().key;
-        alert("here af")
         database.ref('LB/' + ClientKey + '/HighLevel').set(level);
         database.ref('LB/' + ClientKey + '/HighScore').set(score);
         database.ref('LB/' + ClientKey + '/Rank').set(score);
-        alert("Written to DB")
       }
       draw();
     </script>
