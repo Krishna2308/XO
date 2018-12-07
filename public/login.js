@@ -1,11 +1,11 @@
 function initApp(){
 	var unsub = firebase.auth().onAuthStateChanged(function(user) {
 	if(user) {
-		var uid;
-        uid = user.uid;
-        window.alert(uid);
-        var userName = document.getElementById("txtun").value;
-        database.ref('USER/' + uid + '/name').set(userName);
+		//var uid;
+        //uid = user.uid;
+        //window.alert(uid);
+        //var userName = document.getElementById("txtun").value;
+        //database.ref('USER/' + uid + '/name').set(userName);
         window.location.href = "mainmenu.html";
 		//console.log("signed up with email " + userEmail);
 		//window.alert("here")
