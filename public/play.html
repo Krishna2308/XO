@@ -115,7 +115,7 @@
       }
       function update() {
         //update yOffset
-        if (score != 0 && score%2 == 0 && incrementLock != score) {
+        if (score != 0 && score%3 == 0 && incrementLock != score) {
           //for every 2 bricks destroyed, increase yOffset by 10
           //also check if yOffset has already been increased for the current score
           for(var c=0; c<brickColumnCount; c++) {
