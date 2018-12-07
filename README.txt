@@ -7,11 +7,8 @@ Features to implement:
 [X] Bricks keep reappearing
 [X] levels
 [X] Ball speed increases over time
-[] Database: Global leaderboard
-[] Server side code - communicating with the database including:
-                  1. write player score to leaderboard after every game
-                  2. read from database and print leaderboard
-[] Edit homepage - make buttons look better, add game info, add leaderboard button
+[X] Database: Global leaderboard
+[X] Edit homepage - make buttons look better, add game info, add leaderboard button
 [] Make youtube video
 
 Additional features:
