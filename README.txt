@@ -10,9 +10,9 @@ Features to implement:
 [X] Database: Global leaderboard
 [X] Edit homepage - make buttons look better, add game info, add leaderboard button
 [X] Host project
-[] Make youtube video
-[] Make git repo public
-[] Update cs252 google doc
+[X] Make youtube video
+[X] Make git repo public
+[X] Update cs252 google doc
 
 Additional features:
 [] Player profiles: User can browse player profiles and look at player stats (attempts/highest score etc)
