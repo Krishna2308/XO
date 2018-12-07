@@ -2,12 +2,30 @@
 <html>
 <head>
 <title>Sign Up!</title>
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-database.js"></script>
-    <script src="login.js"></script>
+  <!-- Add additional services that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC3mArfFhP19NkCEc9e6WIfzfCQV1ML8tQ",
+      authDomain: "tictactwo-6f158.firebaseapp.com",
+      databaseURL: "https://tictactwo-6f158.firebaseio.com",
+      projectId: "tictactwo-6f158",
+      storageBucket: "tictactwo-6f158.appspot.com",
+      messagingSenderId: "36054004772"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="login.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.0/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-kCsv8pSAWtRge/+zcLDeqwoWhTQSUX2esQPYOsocgrg1eMj7T2wrTJP348T3mpBU" crossorigin="anonymous">
 
 <style>
@@ -23,7 +41,7 @@
         box-sizing: border-box;
 }
 h1{
-        font-family: sans-serif; 
+        font-family: sans-serif;
         text-align: center;
         color: rgb(18, 40, 40);
 }
@@ -31,9 +49,9 @@ h1{
 </head>
 <body>
   <div class="container">
-    
-    
-    
+
+
+
     <div class = "signupbox">
 
         <center>
@@ -50,10 +68,10 @@ h1{
 
         <label for="pass"><b>Choose a password</b></label>
         <input id="txtpass" type="password" placeholder="Enter Password" name="pass" required>
-       
+
         <br>
         <button onclick="signUp()" id="signupButton">Sign Up</button>
-    
+
     </div>
 
   </div>
